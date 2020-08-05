@@ -15,80 +15,42 @@ class ConditionerTest {
         conditioner.setName(expected);
         assertEquals(expected, conditioner.getName());
     }
-// Устанавливаем максимальную температуру
-    @Test
-    public void shouldMaxTemperature() {
-        Conditioner conditioner = new Conditioner();
-        int maxTemperature = 30;
 
+    @Test
+    public void shouldIncrease() {
+        Conditioner conditioner = new Conditioner();
         conditioner.setMaxTemperature(30);
-        assertEquals(maxTemperature, conditioner.getMaxTemperature());
-    }
-// Устанавливаем минимальную температуру
-    @Test
-    public void shouldMinTemperature() {
-        Conditioner conditioner = new Conditioner();
-        int minTemperature = 20;
-
-        conditioner.setMinTemperature(minTemperature);
-        assertEquals(minTemperature, conditioner.getMinTemperature());
-    }
-
-
-    // Средняя 25, + увеличивается на градус, - уменьшается на градус
-    @Test
-    public void shouldCurrentTemperature3() {
-        Conditioner conditioner = new Conditioner();
-        int currentTemperature = 25;
-
-        conditioner.setCurrentTemperature(currentTemperature);
-        assertEquals(currentTemperature, conditioner.getCurrentTemperature());
-    }
-
-    @Test
-    public void increaseCurrentTemperature3() {
-        Conditioner conditioner = new Conditioner();
+        conditioner.setCurrentTemperature(25);
         conditioner.increaseCurrentTemperature();
+        assertEquals(26, conditioner.getCurrentTemperature());
     }
 
     @Test
-    public void decreaseCurrentTemperature3() {
+    public void shouldNotIncrease() {
         Conditioner conditioner = new Conditioner();
-        conditioner.decreaseCurrentTemperature();
-    }
-
-
-// Средняя температура 30, увеличение-ничего и понижение-убавляется
-    @Test
-    public void shouldCurrentTemperature1() {
-        Conditioner conditioner = new Conditioner();
-        int currentTemperature = 30;
-
-        conditioner.setCurrentTemperature(currentTemperature);
-        assertEquals(currentTemperature, conditioner.getCurrentTemperature());
-    }
-
-    @Test
-    public void increaseCurrentTemperature1() {
-        Conditioner conditioner = new Conditioner();
+        conditioner.setMaxTemperature(30);
+        conditioner.setCurrentTemperature(30);
         conditioner.increaseCurrentTemperature();
+        assertEquals(30, conditioner.getCurrentTemperature());
     }
 
-// Средняя температура 20, увеличение-добавляется, понижение-ничего
-    @Test
-    public void shouldCurrentTemperature2() {
-        Conditioner conditioner = new Conditioner();
-        int currentTemperature = 20;
-
-        conditioner.setCurrentTemperature(currentTemperature);
-        assertEquals(currentTemperature, conditioner.getCurrentTemperature());
-    }
 
     @Test
-    public void decreaseCurrentTemperature2() {
+    public void shouldDecrease() {
         Conditioner conditioner = new Conditioner();
+        conditioner.setMinTemperature(10);
+        conditioner.setCurrentTemperature(11);
         conditioner.decreaseCurrentTemperature();
+        assertEquals(10, conditioner.getCurrentTemperature());
     }
 
+    @Test
+    public void shouldNotDecrease() {
+        Conditioner conditioner = new Conditioner();
+        conditioner.setMinTemperature(10);
+        conditioner.setCurrentTemperature(10);
+        conditioner.decreaseCurrentTemperature();
+        assertEquals(10, conditioner.getCurrentTemperature());
+    }
 
 }
